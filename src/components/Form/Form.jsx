@@ -3,19 +3,19 @@ import { useTelegram } from "../../hooks/useTelegram";
 import './Form.css';
 
 const Form = () => {
-   const [country, setCountry] = useState('');
+   const [city, setCity] = useState('');
    const [street, setStreet] = useState('');
    const [subject, setSubject] = useState('phisical');
    const {tg} = useTelegram();
 
    const onSendData = useCallback(() => {
       const data = {
-         country,
+         city,
          street,
          subject
       }
       tg.sendData(JSON.stringify(data))
-   }, [country, street, subject])
+   }, [city, street, subject])
 
    useEffect(() => {
       tg.onEvent('mainButtonClicked', onSendData)
@@ -31,15 +31,15 @@ const Form = () => {
    }, [])
 //  Если не заолнил улицу или страну, то кнопку срываем и не даем отправлять в бота пустые данные
    useEffect(() => {
-     if(!street || !country) {
+     if(!street || !city) {
         tg.MainButton.hide();
      } else {
         tg.MainButton.show();
      }
-   },[country, street])
+   },[city, street])
 
-   const onChangeCounty = (e) => {
-        setCountry(e.target.value)
+   const onChangeCity = (e) => {
+        setCity(e.target.value)
    }
 
    const onChangeStreet = (e) => {
@@ -56,9 +56,9 @@ const Form = () => {
          <input 
             className={'input'} 
             type="text" 
-            placeholder={'Страна'} 
-            value={country}
-            onChange={onChangeCounty}
+            placeholder={'Город'} 
+            value={city}
+            onChange={onChangeCity}
          />
          <input 
             className={'input'} 
