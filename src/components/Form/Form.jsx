@@ -16,7 +16,7 @@ const Form = () => {
    }, [])
 //  Если не заолнил улицу или страну, то кнопку срываем и не даем отправлять в бота пустые данные
    useEffect(() => {
-     if(!street || !city) {
+     if(!street || !country) {
         tg.MainButton.hide();
      } else {
         tg.MainButton.show();
